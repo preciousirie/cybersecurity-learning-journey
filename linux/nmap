@@ -1,0 +1,73 @@
+# 🔎 Nmap Fundamentals
+
+## Overview
+
+Nmap (Network Mapper) is a network discovery and security auditing tool.
+
+I am learning Nmap as part of my cybersecurity training to understand how hosts, ports, services, and network information can be discovered in an authorized lab environment.
+
+## What I Learned
+
+I learned that:
+
+* A **host** is a device on a network.
+* A **port** is a logical communication endpoint.
+* A **service** is a program or network function listening on a port.
+* Nmap can help identify hosts, open ports, and services.
+* TCP and UDP are different transport protocols used by network services.
+
+## Basic Nmap Commands
+
+### Basic host scan
+
+```bash
+nmap <target-ip>
+```
+
+This performs a basic scan of common TCP ports on the target.
+
+### Service detection
+
+```bash
+nmap -sV <target-ip>
+```
+
+The `-sV` option attempts to identify the services and their versions running on discovered ports.
+
+### Operating system detection
+
+```bash
+nmap -O <target-ip>
+```
+
+The `-O` option attempts to identify the target's operating system.
+
+## TCP Basics
+
+I also learned about the TCP three-way handshake:
+
+```text
+SYN → SYN-ACK → ACK
+```
+
+This process establishes a TCP connection between two systems.
+
+## Authorized Lab Practice
+
+My Nmap practice is performed in my cybersecurity lab environment using Kali Linux and an intentionally vulnerable machine such as Metasploitable 2.
+
+The purpose is to understand network discovery and security assessment in a controlled environment.
+
+## Security Perspective
+
+From a defensive perspective, Nmap helps security professionals understand what services are exposed on a system.
+
+From an authorized penetration-testing perspective, this information can help identify the attack surface that should be investigated further.
+
+## Learning Status
+
+🟢 **Learning and practicing**
+
+---
+
+**Next:** Continue practicing Nmap host discovery, port scanning, and service enumeration in an authorized lab.
