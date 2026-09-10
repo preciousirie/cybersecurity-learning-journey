@@ -1,0 +1,135 @@
+# 🔐 Finding: Anonymous FTP Access
+
+## Summary
+
+During an authorized security assessment of my Metasploitable 2 lab machine, I discovered that the FTP service allows anonymous authentication.
+
+## Target
+
+* **System:** Metasploitable 2
+* **IP:** `192.168.1.115`
+* **Port:** `21/tcp`
+* **Service:** FTP
+* **Version:** vsftpd 2.3.4
+
+## Discovery
+
+Service enumeration identified:
+
+```text
+21/tcp open ftp vsftpd 2.3.4
+```
+
+I then performed a targeted Nmap check:
+
+```bash
+nmap -p 21 --script ftp-anon 192.168.1.115
+```
+
+The result was:
+
+```text
+ftp-anon: Anonymous FTP login allowed (FTP code 230)
+```
+
+## Manual Verification
+
+I manually connected to the FTP service:
+
+```bash
+ftp 192.168.1.115
+```
+
+I supplied the username:
+
+```text
+anonymous
+```
+
+
+I supplied the password: 
+
+anonymous
+
+The server responded:
+
+```text
+230 Login successful.
+```
+
+This independently confirmed that anonymous FTP authentication was enabled.
+
+## Additional Observation
+
+After authentication, I checked the available directory:
+
+```text
+pwd
+```
+
+The server reported:
+
+```text
+Remote directory: /
+```
+
+I also requested directory listings. The server successfully processed the requests, but no filenames were displayed.
+
+## Security Impact
+
+Anonymous FTP access can create a security risk when it exposes files or allows unauthorized users to upload, modify, or delete data.
+
+In this lab, I did not establish that anonymous users could access sensitive files or modify data. Therefore, I am documenting the finding as an **anonymous-access configuration issue requiring further assessment**, rather than claiming a confirmed high-severity vulnerability.
+
+## Evidence
+
+### Nmap
+
+```text
+21/tcp open ftp vsftpd 2.3.4
+```
+
+### Anonymous authentication
+
+```text
+230 Login successful.
+```
+
+### Directory
+
+```text
+Remote directory: /
+```
+
+## Recommended Defensive Actions
+
+Depending on the intended use of the FTP service:
+
+* Disable anonymous access if it is not required.
+* Restrict anonymous users to the minimum necessary permissions.
+* Prevent anonymous users from writing to sensitive directories.
+* Avoid exposing sensitive files through FTP.
+* Prefer secure file-transfer methods where appropriate.
+* Monitor FTP authentication and access activity.
+
+## What I Learned
+
+This exercise taught me that a security finding should be **verified before assigning severity**.
+
+My assessment process was:
+
+```text
+Discover
+   ↓
+Identify
+   ↓
+Test
+   ↓
+Verify
+   ↓
+Assess impact
+   ↓
+Document
+```
+
+This was performed entirely within my authorized Metasploitable 2 laboratory environment.
