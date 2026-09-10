@@ -20,35 +20,26 @@ I learned that:
 
 ### Basic host scan
 
-```bash
+
 nmap <target-ip>
-```
 
 This performs a basic scan of common TCP ports on the target.
 
 ### Service detection
-
-```bash
 nmap -sV <target-ip>
-```
 
 The `-sV` option attempts to identify the services and their versions running on discovered ports.
 
 ### Operating system detection
-
-```bash
 nmap -O <target-ip>
-```
 
 The `-O` option attempts to identify the target's operating system.
 
 ## TCP Basics
-
 I also learned about the TCP three-way handshake:
 
-```text
+
 SYN → SYN-ACK → ACK
-```
 
 This process establishes a TCP connection between two systems.
 
@@ -67,7 +58,5 @@ From an authorized penetration-testing perspective, this information can help id
 ## Learning Status
 
 🟢 **Learning and practicing**
-
----
 
 **Next:** Continue practicing Nmap host discovery, port scanning, and service enumeration in an authorized lab.
