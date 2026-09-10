@@ -1,0 +1,112 @@
+# 🔎 Nmap Service Enumeration — Metasploitable 2
+
+## Lab Overview
+
+This lab documents an authorized Nmap service-enumeration exercise performed against my Metasploitable 2 virtual machine.
+
+### Lab Environment
+
+| Component        | Details                                       |
+| ---------------- | --------------------------------------------- |
+| Attacker/Scanner | Kali Linux                                    |
+| Target           | Metasploitable 2                              |
+| Scanner          | Nmap 7.99                                     |
+| Target IP        | `192.168.1.115`                               |
+| Purpose          | Security learning and authorized lab practice |
+
+## 1. Host Discovery
+
+I first performed host discovery on my local lab network: sudo nmap -sn 192.168.1.0/24
+
+The scan identified four active hosts.
+
+The host at `192.168.1.115` had an Oracle VirtualBox virtual NIC, indicating that it was a virtual machine in my lab environment.
+
+## 2. Service Enumeration
+
+I then performed service and version detection against the authorized Metasploitable 2 target: nmap -sV 192.168.1.115
+
+### Results
+
+The scan identified several open TCP services:
+
+| Port | Service   | Detected Version          |
+| ---: | --------- | ------------------------- |
+|   21 | FTP       | vsftpd 2.3.4              |
+|   22 | SSH       | OpenSSH 4.7p1             |
+|   23 | Telnet    | Linux telnetd             |
+|   25 | SMTP      | Postfix smtpd             |
+|   53 | DNS       | ISC BIND 9.4.2            |
+|   80 | HTTP      | Apache 2.2.8              |
+|  111 | RPC       | rpcbind                   |
+|  139 | SMB       | Samba                     |
+|  445 | SMB       | Samba                     |
+| 1524 | Bindshell | Metasploitable root shell |
+| 2049 | NFS       | NFS v2–4                  |
+| 2121 | FTP       | ProFTPD 1.3.1             |
+| 3306 | Database  | MySQL 5.0.51a             |
+| 5432 | Database  | PostgreSQL 8.3.x          |
+| 5900 | VNC       | Protocol 3.3              |
+| 6000 | X11       | Access denied             |
+| 6667 | IRC       | UnrealIRCd                |
+| 8009 | AJP13     | Apache Jserv              |
+| 8180 | HTTP      | Apache Tomcat             |
+
+Additional services were also detected on ports 512, 513, 514, and 1099.
+
+## 3. Initial Observations
+
+The scan shows that the target exposes a large number of network services.
+
+Several services use older software versions or protocols that require further security investigation.
+
+Examples include:
+
+* FTP
+* Telnet
+* SMB
+* NFS
+* VNC
+* Database services
+* Web services
+* IRC
+* Java RMI
+
+The presence of an open service does not automatically mean that the service is vulnerable. Further enumeration and verification are required.
+
+## 4. Security Analysis
+
+From a defensive perspective, this scan demonstrates the importance of reducing unnecessary network exposure.
+
+A system running many publicly accessible services has a larger attack surface and therefore requires careful configuration, patching, authentication, access control, and monitoring.
+
+From an authorized security-testing perspective, service enumeration provides information that can be used to determine which areas require further investigation.
+
+## 5. What I Learned
+
+This exercise helped me understand the relationship between:
+
+**Host → Port → Service → Version → Potential Security Issue**
+
+I also learned that Nmap service detection is an information-gathering step rather than proof that a vulnerability exists.
+
+## 6. Next Steps
+
+For further authorized lab investigation, I will:
+
+1. Research the identified software versions.
+2. Identify potential vulnerabilities associated with relevant versions.
+3. Verify findings safely within the lab.
+4. Record evidence and observations.
+5. Document appropriate defensive recommendations.
+
+## Ethics
+
+This scan was performed against my own authorized Metasploitable 2 cybersecurity lab environment for educational purposes.
+
+---
+
+**Learning progression:**
+
+`Host Discovery → Port Scanning → Service Enumeration → Vulnerability Investigation`
+The journey is too understand "Reconnaissance, Vulnerability Assessment before jumping into Exploits"
